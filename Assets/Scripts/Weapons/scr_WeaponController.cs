@@ -62,8 +62,6 @@ public class scr_WeaponController : MonoBehaviour
 
     [Header("Shooting")]
     public float shootCooldown = 1f;
-
-    [SerializeField]
     private float timeStamp = 1f; 
     private float currentFireRate;
     public List<WeaponFireType> allowedFireTypes;
@@ -73,6 +71,7 @@ public class scr_WeaponController : MonoBehaviour
 
     [HideInInspector]
     public bool isAimingIn;
+
 
     private void Start() {
         newWeaponRotation = transform.localRotation.eulerAngles;
@@ -120,8 +119,6 @@ public class scr_WeaponController : MonoBehaviour
                 Debug.Log(hit.transform.name);
             }
         }
-
-
         // load bullet settings
     }
 
@@ -211,15 +208,15 @@ public class scr_WeaponController : MonoBehaviour
            isGroundedTrigger = true;
        }
 
-       else if (!characterController.isGrounded && isGroundedTrigger)
+        else if (!characterController.isGrounded && isGroundedTrigger)
        {
            weaponAnimator.SetTrigger("Falling");
            isGroundedTrigger = false;
        }
 
-        if(!characterController.isSprinting && isGroundedTrigger)
+        if(!characterController.isSprinting && isGroundedTrigger && timeStamp >= shootCooldown)
         {
-            weaponAnimator.SetBool("IsShooting", isShooting);
+            weaponAnimator.SetBool("IsShooting", isShooting);   
         }
         
         weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);

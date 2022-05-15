@@ -370,7 +370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503814152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 61.19, y: 6.07, z: -80.64852}
+  m_LocalPosition: {x: 55.9, y: 6.07, z: -80.64852}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1022,6 +1022,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7997491722393638411, guid: 7b778837cf4220d4694b615a1904b5ed, type: 3}
+      propertyPath: Crosshair
+      value: 
+      objectReference: {fileID: 1754193101}
+    - target: {fileID: 7997491722393638411, guid: 7b778837cf4220d4694b615a1904b5ed, type: 3}
+      propertyPath: rateOfFire
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b778837cf4220d4694b615a1904b5ed, type: 3}
 --- !u!1001 &1514126163
@@ -1207,8 +1215,8 @@ GameObject:
   - component: {fileID: 1754193104}
   - component: {fileID: 1754193103}
   m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
+  m_Name: Crosshair
+  m_TagString: Crosshair
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
