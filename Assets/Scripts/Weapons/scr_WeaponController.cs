@@ -100,12 +100,15 @@ public class scr_WeaponController : MonoBehaviour
 
     private void Shoot()
     {
-        var bullet = Instantiate(bulletPrefab, bulletSpawn);
-
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        if (!characterController.isSprinting)
         {
-            Debug.Log(hit.transform.name);
+            var bullet = Instantiate(bulletPrefab, bulletSpawn);
+
+            RaycastHit hit;
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+            {
+                Debug.Log(hit.transform.name);
+            }
         }
 
 
@@ -194,6 +197,11 @@ public class scr_WeaponController : MonoBehaviour
            isGroundedTrigger = false;
        }
 
+        if(!characterController.isSprinting && isGroundedTrigger)
+        {
+            weaponAnimator.SetBool("IsShooting", isShooting);
+        }
+        
         weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);
         weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
     }
