@@ -17,6 +17,7 @@ public class scr_WeaponController : MonoBehaviour
     public Animator weaponAnimator;
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
+    public GameObject Crosshair;
 
     [Header("Settings")]
     public WeaponSettingsModel settings;
@@ -60,7 +61,10 @@ public class scr_WeaponController : MonoBehaviour
     private Vector3 weaponSwayPositionVelocity;
 
     [Header("Shooting")]
-    public float rateOfFire;
+    public float shootCooldown = 1f;
+
+    [SerializeField]
+    private float timeStamp = 1f; 
     private float currentFireRate;
     public List<WeaponFireType> allowedFireTypes;
     public WeaponFireType currentFireType;
@@ -88,12 +92,18 @@ public class scr_WeaponController : MonoBehaviour
         {
             return;
         }
+        //Prevent TimeStamp from overflow
+        if (timeStamp > 6.3f)
+        {
+            timeStamp = 1f;
+        }
 
-       CalculateWeaponRotation();
-       SetWeaponAnimations();
-       CalculateWeaponSway();
-       CalculateAimingIn();
-       CalculateShooting();
+        timeStamp += Time.deltaTime;
+        CalculateWeaponRotation();
+        SetWeaponAnimations();
+        CalculateWeaponSway();
+        CalculateAimingIn();
+        CalculateShooting();
     }
 
     #region  - shooting -
@@ -115,11 +125,16 @@ public class scr_WeaponController : MonoBehaviour
         // load bullet settings
     }
 
+    
     private void CalculateShooting()
     {
         if(isShooting)
-        {
-            Shoot();
+        {   
+            if(timeStamp >= shootCooldown){
+                Shoot();
+                timeStamp = 0;
+            }
+            
 
             if(currentFireType == WeaponFireType.SemiAuto)
             {
@@ -136,7 +151,12 @@ public class scr_WeaponController : MonoBehaviour
 
         if (isAimingIn)
         {
+            Crosshair.SetActive(false);
             targetPosition = characterController.cameraHolder.transform.position + (weaponSwayObject.transform.position - sightTarget.position) + (characterController.cameraHolder.transform.forward * sightOffset);
+        }
+        else
+        {
+            Crosshair.SetActive(true);
         }
 
         weaponSwayPosition = weaponSwayObject.transform.position;
@@ -217,7 +237,6 @@ public class scr_WeaponController : MonoBehaviour
         {
             swayTime = 0;
         }
-
     }
 
     private Vector3 LissajousCurve(float Time, float A, float B)
