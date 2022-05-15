@@ -102,6 +102,13 @@ public class scr_WeaponController : MonoBehaviour
     {
         var bullet = Instantiate(bulletPrefab, bulletSpawn);
 
+        RaycastHit hit;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        {
+            Debug.Log(hit.transform.name);
+        }
+
+
         // load bullet settings
     }
 
@@ -175,7 +182,7 @@ public class scr_WeaponController : MonoBehaviour
            fallingDelay = Time.deltaTime;
        }
 
-       if(characterController.isGrounded && !isGroundedTrigger && fallingDelay > 0.001f)
+       if(characterController.isGrounded && !isGroundedTrigger && fallingDelay < 0.1f)
        {
            weaponAnimator.SetTrigger("Land");
            isGroundedTrigger = true;
@@ -183,7 +190,6 @@ public class scr_WeaponController : MonoBehaviour
 
        else if (!characterController.isGrounded && isGroundedTrigger)
        {
-           Debug.Log("Trigger Falling");
            weaponAnimator.SetTrigger("Falling");
            isGroundedTrigger = false;
        }

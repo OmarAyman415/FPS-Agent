@@ -121,6 +121,11 @@ public class scr_CharacterController : MonoBehaviour
 
     private void ShootingPressed()
     {
+        if (isSprinting)
+        {
+            currentWeapon.isShooting = false;
+        }
+
         if(currentWeapon)
         {
             currentWeapon.isShooting = true;
@@ -290,6 +295,10 @@ public class scr_CharacterController : MonoBehaviour
         // Jump
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
+        if (currentWeapon == null)
+        {
+            Debug.Log("no weapon");
+        }
         currentWeapon.TriggerJump();
     }
 
