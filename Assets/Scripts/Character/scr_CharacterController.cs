@@ -99,6 +99,8 @@ public class scr_CharacterController : MonoBehaviour
         {
             currentWeapon.Initialise(this);
         }
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     #endregion
