@@ -61,8 +61,8 @@ public class scr_WeaponController : MonoBehaviour
     private Vector3 weaponSwayPositionVelocity;
 
     [Header("Shooting")]
-    public float shootCooldown = 1f;
-    private float timeStamp = 1f; 
+    public float shootCooldown = 0.5f;
+    private float timeStamp = 0.5f; 
     private float currentFireRate;
     public List<WeaponFireType> allowedFireTypes;
     public WeaponFireType currentFireType;
@@ -94,7 +94,7 @@ public class scr_WeaponController : MonoBehaviour
         //Prevent TimeStamp from overflow
         if (timeStamp > 6.3f)
         {
-            timeStamp = 1f;
+            timeStamp = 0.5f;
         }
 
         timeStamp += Time.deltaTime;
