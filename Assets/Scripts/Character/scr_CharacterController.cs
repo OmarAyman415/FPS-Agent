@@ -64,6 +64,7 @@ public class scr_CharacterController : MonoBehaviour
 
     [Header("Aiming In")]
     public bool isAimingIn;
+    public bool isShooting;
 
     #region - Awake -
 
@@ -81,6 +82,8 @@ public class scr_CharacterController : MonoBehaviour
         defaultInput.Character.SprintReleased.performed += e => StopSprint();
         defaultInput.Weapon.Fire2Pressed.performed += e => AimingInPressed();
         defaultInput.Weapon.Fire2Released.performed += e => AimingInReleased();
+        defaultInput.Weapon.Fire1Pressed.performed += e => ShootingPressed();
+        defaultInput.Weapon.Fire1Released.performed += e => ShootingReleased();
 
         defaultInput.Enable();
 
@@ -114,6 +117,25 @@ public class scr_CharacterController : MonoBehaviour
 
     #endregion
 
+    #region - Shooting -
+
+    private void ShootingPressed()
+    {
+        if(currentWeapon)
+        {
+            currentWeapon.isShooting = true;
+        }
+    }
+
+    private void ShootingReleased()
+    {
+        if(currentWeapon)
+        {
+            currentWeapon.isShooting = false;
+        }
+    }
+
+    #endregion
 
     #region - Aiming In -
 
@@ -157,11 +179,11 @@ public class scr_CharacterController : MonoBehaviour
 
     private void CalculateView()
     {
-        newCharacterRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.deltaTime;
+        newCharacterRotation.y += (isAimingIn ? playerSettings.ViewXSensitivity * playerSettings.AimingSensitivityEffector : playerSettings.ViewXSensitivity) * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(newCharacterRotation);
 
 
-        newCameraRotation.x += playerSettings.ViewYSensitivity * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.deltaTime;
+        newCameraRotation.x += (isAimingIn ? playerSettings.ViewYSensitivity * playerSettings.AimingSensitivityEffector : playerSettings.ViewYSensitivity) * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.deltaTime;
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, viewClampYMin, viewClampYMax);
 
         cameraHolder.localRotation = Quaternion.Euler(newCameraRotation);
@@ -196,6 +218,10 @@ public class scr_CharacterController : MonoBehaviour
         else if (playerStance == PlayerStance.Prone)
         {
             playerSettings.SpeedEffector = playerSettings.ProneSpeedEffector;
+        }
+        else if (isAimingIn)
+        {
+            playerSettings.SpeedEffector = playerSettings.AimingSpeedEffector;
         }
         else
         {
