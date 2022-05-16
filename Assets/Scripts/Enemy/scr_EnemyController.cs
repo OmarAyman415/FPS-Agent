@@ -9,7 +9,6 @@ public class scr_EnemyController : MonoBehaviour
     public float health = 50f;
     public float lookRadius = 10f;
     public float damage = 5f;
-    public GameObject player;
 
     public bool playerInReach;
     public float attackDelayTimer;
@@ -23,12 +22,17 @@ public class scr_EnemyController : MonoBehaviour
 
     public Animator enemyAnimator;
 
+    #region - Start -
+
     void Start()
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");
     }
+
+    #endregion
+
+    #region - Update -
 
     void Update ()
     {
@@ -71,17 +75,22 @@ public class scr_EnemyController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region - Attack -
+
     public void Attack()
     {
         if (attackDelayTimer >= 1f)
         {
-            player.GetComponent<scr_CharacterController>().TakeDamage(damage);
+            target.GetComponent<scr_CharacterController>().TakeDamage(damage);
             attackDelayTimer = 0f;
         }
     }
 
-    
+    #endregion
 
+    #region - Taking Damage -
 
     public void TakeDamage(float amount)
     {
@@ -99,12 +108,19 @@ public class scr_EnemyController : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
+    #endregion
+
+    #region - Gizmo -
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
+
+    #endregion
+
+    #region - Animation -
 
     private void enemyAnimationPlay()
     {
@@ -126,4 +142,6 @@ public class scr_EnemyController : MonoBehaviour
             enemyAnimator.SetBool("isAttacking", false);
         }
     }
+
+    #endregion
 }
