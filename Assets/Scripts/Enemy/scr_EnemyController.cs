@@ -41,7 +41,6 @@ public class scr_EnemyController : MonoBehaviour
     void Update ()
     {
         float distance = Vector3.Distance(target.position, transform.position);
-        Debug.Log(distance);
 
         if (distance <= lookRadius)
         {

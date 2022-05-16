@@ -59,14 +59,17 @@ public class scr_CharacterController : MonoBehaviour
     public scr_WeaponController currentWeapon;
     public float weaponAnimationSpeed;
 
+    [Header("Pausing")]
+    public scr_EnemyManager enemyManager;
+
     [HideInInspector]
     public bool isGrounded;
     [HideInInspector]
     public bool isFalling;
 
-    [Header("Aiming In")]
-    public bool isAimingIn;
-    public bool isShooting;
+    bool isAimingIn;
+    [HideInInspector]
+    public bool isPaused = false;
 
     #region - Awake -
 
@@ -78,6 +81,7 @@ public class scr_CharacterController : MonoBehaviour
         defaultInput.Character.Movement.performed += e => input_Movement = e.ReadValue<Vector2>();
         defaultInput.Character.View.performed += e => input_View = e.ReadValue<Vector2>();
         defaultInput.Character.Jump.performed += e => Jump();
+        defaultInput.Pause.Pause.performed += e => Pause();
         defaultInput.Character.Crouch.performed += e => Crouch();
         defaultInput.Character.Prone.performed += e => Prone();
         defaultInput.Character.Sprint.performed += e => ToggleSprint();
@@ -167,6 +171,25 @@ public class scr_CharacterController : MonoBehaviour
 
         currentWeapon.isAimingIn = isAimingIn;
     }
+
+    #endregion
+
+    #region - Paused -
+
+    private void Pause()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+        else
+        {
+            Time.timeScale = 0f; 
+            isPaused = true;
+        }
+    }
+
 
     #endregion
 
