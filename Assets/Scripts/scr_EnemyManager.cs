@@ -28,14 +28,4 @@ public class scr_EnemyManager : MonoBehaviour
 
         Instantiate(EnemyPrefab, SpawnPoint[randomNumber].transform.position, Quaternion.identity);
     }
-
-    private void StartWave()
-    {
-
-    }
-
-    private void NextWave()
-    {
-
-    }
 }
