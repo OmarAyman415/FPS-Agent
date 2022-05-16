@@ -515,7 +515,8 @@ MonoBehaviour:
   isSprinting: 0
   currentWeapon: {fileID: 637232081409665134}
   weaponAnimationSpeed: 0
-  enemyManager: {fileID: 0}
+  enemyManager: {fileID: 5831256539739481235, guid: f293ce1478a473d4a955391e99837c89,
+    type: 3}
   isGrounded: 0
   isFalling: 0
   isPaused: 0
