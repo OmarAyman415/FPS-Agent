@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class scr_EnemyManager : MonoBehaviour
 {
-    private int waveNumber = 0;
-    private int enemySpawnAmount = 0;
     public Transform[] SpawnPoint;
     public GameObject EnemyPrefab;
 
