@@ -8,7 +8,10 @@ public class scr_WeaponController : MonoBehaviour
     [Header("Weapon Attributes")]
     public float damage = 10f;
     public float range = 100f;
+    public float impactForce = 30f;
     public Camera fpsCam;
+    public ParticleSystem muzzleFlash;
+    public GameObject impactEffect;
 
 
     private scr_CharacterController characterController;
@@ -72,19 +75,26 @@ public class scr_WeaponController : MonoBehaviour
     [HideInInspector]
     public bool isAimingIn;
 
-
+    #region - Start -
     private void Start() {
         newWeaponRotation = transform.localRotation.eulerAngles;
 
         currentFireType = allowedFireTypes.First();
     }
 
+    #endregion
+
+    #region - initialisation -
     public void Initialise(scr_CharacterController CharacterController)
     {
         characterController = CharacterController;
         isInitialised = true;
     }
-    
+
+    #endregion
+
+    #region - Update -
+
     private void Update()
     {
         if(!isInitialised)
@@ -105,6 +115,8 @@ public class scr_WeaponController : MonoBehaviour
         CalculateShooting();
     }
 
+    #endregion
+
     #region  - shooting -
 
     private void Shoot()
@@ -113,10 +125,27 @@ public class scr_WeaponController : MonoBehaviour
         {
             var bullet = Instantiate(bulletPrefab, bulletSpawn);
 
+            muzzleFlash.Play();
+
             RaycastHit hit;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
                 Debug.Log(hit.transform.name);
+
+                scr_EnemyController target = hit.transform.GetComponent<scr_EnemyController>();
+                if (target != null)
+                {
+                    target.TakeDamage(damage);
+                }
+
+                if(hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * impactForce);
+                }
+
+                GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impactGO, 2f);
+
             }
         }
         // load bullet settings
@@ -142,6 +171,8 @@ public class scr_WeaponController : MonoBehaviour
 
     #endregion
 
+    #region - Aiming -
+
     private void CalculateAimingIn()
     {
         var targetPosition = transform.position;
@@ -161,12 +192,19 @@ public class scr_WeaponController : MonoBehaviour
         weaponSwayObject.transform.position = weaponSwayPosition + swayPosition;
     }
 
+    #endregion
+
+    #region - Jumping -
+
     public void TriggerJump()
     {
         isGroundedTrigger = false;
         weaponAnimator.SetTrigger("Jump");
     }
 
+    #endregion
+
+    #region - Weapon Rotation -
 
     private void CalculateWeaponRotation()
     {
@@ -189,7 +227,10 @@ public class scr_WeaponController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
     }
-    
+
+    #endregion
+
+    #region - Weapon Animation
 
     private void SetWeaponAnimations()
     {
@@ -223,6 +264,10 @@ public class scr_WeaponController : MonoBehaviour
         weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
     }
 
+    #endregion
+
+    #region - Weapon Sway -
+
     private void CalculateWeaponSway()
     {
         var targetPosition = LissajousCurve(swayTime, swayAmountA, swayAmountB) / (isAimingIn ? swayScale * 2 : swayScale);
@@ -236,8 +281,14 @@ public class scr_WeaponController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region - LissajousCurve -
+
     private Vector3 LissajousCurve(float Time, float A, float B)
     {
         return new Vector3(Mathf.Sin(Time), A * Mathf.Sin(B * Time + Mathf.PI));
     }
+
+    #endregion
 }
