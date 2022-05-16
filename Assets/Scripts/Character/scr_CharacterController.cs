@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static scr_Models;
 
 public class scr_CharacterController : MonoBehaviour
@@ -62,6 +63,9 @@ public class scr_CharacterController : MonoBehaviour
     [Header("Pausing")]
     public scr_EnemyManager enemyManager;
 
+    [Header("HurtImage")]
+    public GameObject GotHitScreen;
+
     [HideInInspector]
     public bool isGrounded;
     [HideInInspector]
@@ -121,6 +125,19 @@ public class scr_CharacterController : MonoBehaviour
         CalculateJump();
         CalculateStance();
         CalculateAimingIn();
+
+        if (GotHitScreen != null)
+        {
+            if (GotHitScreen.GetComponent<Image>().color.a > 0)
+            {
+                var color = GotHitScreen.GetComponent<Image>().color;
+
+                color.a -= 0.01f;
+
+                GotHitScreen.GetComponent<Image>().color = color;
+            }
+        }
+
     }
 
     #endregion
@@ -448,6 +465,11 @@ public class scr_CharacterController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        var color = GotHitScreen.GetComponent<Image>().color;
+        color.a = 0.8f;
+
+        GotHitScreen.GetComponent<Image>().color = color;
+
         Debug.Log("get damaged bitch");
         currentHealth -= damage;
         if(currentHealth <= 0)
