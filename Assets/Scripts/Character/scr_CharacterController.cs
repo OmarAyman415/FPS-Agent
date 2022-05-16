@@ -182,11 +182,13 @@ public class scr_CharacterController : MonoBehaviour
         {
             Time.timeScale = 1f;
             isPaused = false;
+            AudioListener.pause = true;
         }
         else
         {
             Time.timeScale = 0f; 
             isPaused = true;
+            AudioListener.pause = false;
         }
     }
 

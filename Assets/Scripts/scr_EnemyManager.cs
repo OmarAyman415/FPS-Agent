@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class scr_EnemyManager : MonoBehaviour
 {
+    private int waveNumber = 0;
+    private int enemySpawnAmount = 0;
     public Transform[] SpawnPoint;
     public GameObject EnemyPrefab;
 
@@ -23,6 +25,19 @@ public class scr_EnemyManager : MonoBehaviour
 
     void SpawnNewEnemy()
     {
-        Instantiate(EnemyPrefab, SpawnPoint[0].transform.position, Quaternion.identity);
+
+        int randomNumber = Mathf.RoundToInt(Random.Range(0f, SpawnPoint.Length - 1));
+
+        Instantiate(EnemyPrefab, SpawnPoint[randomNumber].transform.position, Quaternion.identity);
+    }
+
+    private void StartWave()
+    {
+
+    }
+
+    private void NextWave()
+    {
+
     }
 }

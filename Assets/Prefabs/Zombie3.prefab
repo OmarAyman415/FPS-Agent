@@ -153,6 +153,7 @@ MonoBehaviour:
   attackDelayTimer: 0
   delayBetweenAttacks: 1
   attackAnimStartDelay: 1
+  spawn: {fileID: 2715930561099076289, guid: f293ce1478a473d4a955391e99837c89, type: 3}
   enemyAnimator: {fileID: 7177879263786418048}
 --- !u!195 &7177879263786418053
 NavMeshAgent:

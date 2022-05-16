@@ -24,6 +24,9 @@ public class scr_EnemyController : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
 
+    
+    scr_EnemyManager spawn;
+
     public Animator enemyAnimator;
 
     #region - Start -
@@ -32,6 +35,7 @@ public class scr_EnemyController : MonoBehaviour
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
+        spawn = GetComponent<scr_EnemyManager>();
     }
 
     #endregion

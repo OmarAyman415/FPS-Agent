@@ -3,7 +3,17 @@ guid: 1b77b6e133a81264ca33f7285c9d494e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fpsCam: {instanceID: 0}
+  - muzzleFlash: {instanceID: 0}
+  - impactEffect: {instanceID: 0}
+  - weaponAnimator: {instanceID: 0}
+  - bulletPrefab: {fileID: 1076875944916283560, guid: b81acd28ffaa48e4da56b922d6465fd1,
+      type: 3}
+  - bulletSpawn: {instanceID: 0}
+  - Crosshair: {instanceID: 0}
+  - weaponSwayObject: {instanceID: 0}
+  - sightTarget: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
