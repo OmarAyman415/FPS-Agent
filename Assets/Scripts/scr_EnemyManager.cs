@@ -7,9 +7,6 @@ public class scr_EnemyManager : MonoBehaviour
     public Transform[] SpawnPoint;
     public GameObject EnemyPrefab;
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
