@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 public class scr_EnemyController : MonoBehaviour
 {
+    public delegate void EnemyKilled();
+    public static event EnemyKilled OnEnemyKilled;
+
+
     [Header("Enemy Settings")]
     public float health = 50f;
     public float lookRadius = 10f;
@@ -37,6 +41,7 @@ public class scr_EnemyController : MonoBehaviour
     void Update ()
     {
         float distance = Vector3.Distance(target.position, transform.position);
+        Debug.Log(distance);
 
         if (distance <= lookRadius)
         {
@@ -51,17 +56,13 @@ public class scr_EnemyController : MonoBehaviour
 
             if (distance <= agent.stoppingDistance)
             {
+                Attack();
                 playerInReach = true;
             }
             else
             {
                 playerInReach = false;
             }
-        }
-
-        if (playerInReach)
-        {
-            Attack();
         }
 
         enemyAnimationPlay();
@@ -105,7 +106,13 @@ public class scr_EnemyController : MonoBehaviour
 
     void Die()
     {
+        Destroy(GetComponent<BoxCollider>());
         Destroy(gameObject, 2f);
+
+        if(OnEnemyKilled != null)
+        {
+            OnEnemyKilled();
+        }
     }
 
     #endregion
