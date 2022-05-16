@@ -48,20 +48,19 @@ public class scr_EnemyController : MonoBehaviour
             if(!isDead)
             {
                 agent.SetDestination(target.position);
+                if (distance <= agent.stoppingDistance + 0.2f)
+                {
+                    Attack();
+                    playerInReach = true;
+                }
+                else
+                {
+                    playerInReach = false;
+                }
             }
             else
             {
                 agent.isStopped = true;
-            }
-
-            if (distance <= agent.stoppingDistance)
-            {
-                Attack();
-                playerInReach = true;
-            }
-            else
-            {
-                playerInReach = false;
             }
         }
 
