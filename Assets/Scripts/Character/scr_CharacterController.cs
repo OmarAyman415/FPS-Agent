@@ -25,7 +25,8 @@ public class scr_CharacterController : MonoBehaviour
     public float viewClampYMax = 80;
     public LayerMask playerMask;
     public LayerMask groundMask;
-    public float health = 100f;
+    public float maxHealth = 100f;
+    public float currentHealth = 100f;
 
     [Header("Gravity")]
     public float gravityAmount;
@@ -418,12 +419,13 @@ public class scr_CharacterController : MonoBehaviour
 
     #endregion
 
-    #region
+    #region - Damage Taken -
 
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
-        health -= damage;
-        if(health <= 0)
+        Debug.Log("get damaged bitch");
+        currentHealth -= damage;
+        if(currentHealth <= 0)
         {
             Die();
         }
@@ -431,7 +433,7 @@ public class scr_CharacterController : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        Debug.Log("died");
     }
 
     #endregion

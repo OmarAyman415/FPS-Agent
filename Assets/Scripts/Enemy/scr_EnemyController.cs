@@ -11,8 +11,17 @@ public class scr_EnemyController : MonoBehaviour
     public float damage = 5f;
     public GameObject player;
 
+    public bool playerInReach;
+    public float attackDelayTimer;
+    public float delayBetweenAttacks;
+    public float attackAnimStartDelay;
+    private bool isDead;
+
+
     Transform target;
     NavMeshAgent agent;
+
+    public Animator enemyAnimator;
 
     void Start()
     {
@@ -27,41 +36,67 @@ public class scr_EnemyController : MonoBehaviour
 
         if (distance <= lookRadius)
         {
-            agent.SetDestination(target.position);
+            if(!isDead)
+            {
+                agent.SetDestination(target.position);
+            }
+            else
+            {
+                agent.isStopped = true;
+            }
 
             if (distance <= agent.stoppingDistance)
             {
-                Attack();
-                FaceTarget();
+                playerInReach = true;
             }
+            else
+            {
+                playerInReach = false;
+            }
+        }
+
+        if (playerInReach)
+        {
+            Attack();
+        }
+
+        enemyAnimationPlay();
+
+        attackDelayTimer += Time.deltaTime;
+
+
+        if (attackDelayTimer >= 6.3f)
+        {
+            attackDelayTimer = 1f;
         }
     }
 
-    void Attack()
+    public void Attack()
     {
-
+        if (attackDelayTimer >= 1f)
+        {
+            player.GetComponent<scr_CharacterController>().TakeDamage(damage);
+            attackDelayTimer = 0f;
+        }
     }
 
-    void FaceTarget()
-    {
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-    }
+    
 
 
     public void TakeDamage(float amount)
     {
         health -= amount;
-        if(health <= 0 )
+        if(health <= 0)
         {
+            enemyAnimator.SetTrigger("isDead");
             Die();
+            isDead = true;
         }
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 2f);
     }
 
 
@@ -69,5 +104,26 @@ public class scr_EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    private void enemyAnimationPlay()
+    {
+        if (GetComponent<NavMeshAgent>().velocity.magnitude > 1)
+        {
+            enemyAnimator.SetBool("isRunning", true);
+        }
+        else
+        {
+            enemyAnimator.SetBool("isRunning", false);
+        }
+
+        if (attackDelayTimer >= delayBetweenAttacks - attackAnimStartDelay && attackDelayTimer <= delayBetweenAttacks && playerInReach)
+        {
+            enemyAnimator.SetBool("isAttacking", true);
+        }
+        else if (!playerInReach)
+        {
+            enemyAnimator.SetBool("isAttacking", false);
+        }
     }
 }
