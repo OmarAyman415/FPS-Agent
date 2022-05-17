@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 public class scr_EnemyController : MonoBehaviour
 {
+    public delegate void EnemyKilled();
+    public static event EnemyKilled OnEnemyKilled;
+
+    public scr_EnemyManager enemyManager;
+
     [Header("Enemy Settings")]
     public float health = 50f;
     public float lookRadius = 10f;
@@ -15,14 +20,10 @@ public class scr_EnemyController : MonoBehaviour
     public float delayBetweenAttacks;
     public float attackAnimStartDelay;
     private bool isDead;
-    public int enemiesKilled = 0;
 
 
     Transform target;
     NavMeshAgent agent;
-
-    
-    scr_EnemyManager spawn;
 
     public Animator enemyAnimator;
 
@@ -32,7 +33,6 @@ public class scr_EnemyController : MonoBehaviour
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
-        spawn = GetComponent<scr_EnemyManager>();
     }
 
     #endregion
@@ -105,8 +105,14 @@ public class scr_EnemyController : MonoBehaviour
 
     void Die()
     {
-        enemiesKilled++;
         Destroy(GetComponent<BoxCollider>());
+
+        if(OnEnemyKilled != null)
+        {
+            OnEnemyKilled();
+        }
+
+        Destroy(gameObject, 2.5f);
     }
 
     #endregion
