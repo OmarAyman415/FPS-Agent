@@ -66,7 +66,6 @@ public class scr_WeaponController : MonoBehaviour
     [Header("Shooting")]
     public float shootCooldown = 0.5f;
     private float timeStamp = 0.5f; 
-    private float currentFireRate;
     public List<WeaponFireType> allowedFireTypes;
     public WeaponFireType currentFireType;
     [HideInInspector]
@@ -97,22 +96,25 @@ public class scr_WeaponController : MonoBehaviour
 
     private void Update()
     {
-        if(!isInitialised)
+        if(!characterController.isPaused)
         {
-            return;
-        }
-        //Prevent TimeStamp from overflow
-        if (timeStamp > 6.3f)
-        {
-            timeStamp = 0.5f;
-        }
+            if (!isInitialised)
+            {
+                return;
+            }
+            //Prevent TimeStamp from overflow
+            if (timeStamp > 6.3f)
+            {
+                timeStamp = 0.5f;
+            }
 
-        timeStamp += Time.deltaTime;
-        CalculateWeaponRotation();
-        SetWeaponAnimations();
-        CalculateWeaponSway();
-        CalculateAimingIn();
-        CalculateShooting();
+            timeStamp += Time.deltaTime;
+            CalculateWeaponRotation();
+            SetWeaponAnimations();
+            CalculateWeaponSway();
+            CalculateAimingIn();
+            CalculateShooting();
+        }
     }
 
     #endregion

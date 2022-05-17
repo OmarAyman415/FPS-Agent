@@ -118,26 +118,28 @@ public class scr_CharacterController : MonoBehaviour
     #region - Update -
     private void Update()
     {
-        SetIsGrounded();
-        SetIsFalling();
-        CalculateView();
-        CalculateMovement();
-        CalculateJump();
-        CalculateStance();
-        CalculateAimingIn();
-
-        if (GotHitScreen != null)
+        if(!isPaused)
         {
-            if (GotHitScreen.GetComponent<Image>().color.a > 0)
+            SetIsGrounded();
+            SetIsFalling();
+            CalculateView();
+            CalculateMovement();
+            CalculateJump();
+            CalculateStance();
+            CalculateAimingIn();
+
+            if (GotHitScreen != null)
             {
-                var color = GotHitScreen.GetComponent<Image>().color;
+                if (GotHitScreen.GetComponent<Image>().color.a > 0)
+                {
+                    var color = GotHitScreen.GetComponent<Image>().color;
 
-                color.a -= 0.01f;
+                    color.a -= 0.01f;
 
-                GotHitScreen.GetComponent<Image>().color = color;
+                    GotHitScreen.GetComponent<Image>().color = color;
+                }
             }
         }
-
     }
 
     #endregion
@@ -199,13 +201,13 @@ public class scr_CharacterController : MonoBehaviour
         {
             Time.timeScale = 1f;
             isPaused = false;
-            AudioListener.pause = true;
+            AudioListener.pause = false;
         }
         else
         {
             Time.timeScale = 0f; 
             isPaused = true;
-            AudioListener.pause = false;
+            AudioListener.pause = true;
         }
     }
 

@@ -6,6 +6,8 @@ public class scr_EnemyManager : MonoBehaviour
 {
     public Transform[] SpawnPoint;
     public GameObject EnemyPrefab;
+    public int round = 0;
+    public int enemiesSpawnAmount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,13 @@ public class scr_EnemyManager : MonoBehaviour
 
         int randomNumber = Mathf.RoundToInt(Random.Range(0f, SpawnPoint.Length - 1));
 
-        Instantiate(EnemyPrefab, SpawnPoint[randomNumber].transform.position, Quaternion.identity);
+        Instantiate(EnemyPrefab, SpawnPoint[randomNumber].transform.position, SpawnPoint[randomNumber].transform.rotation);
+    }
+
+    void StartWave()
+    {
+        round = 1;
+        enemiesSpawnAmount = 2;
+        
     }
 }

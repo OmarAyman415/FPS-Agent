@@ -19,6 +19,7 @@ public class scr_EnemyController : MonoBehaviour
     public float delayBetweenAttacks;
     public float attackAnimStartDelay;
     private bool isDead;
+    public int enemiesKilled = 0;
 
 
     Transform target;
@@ -109,6 +110,7 @@ public class scr_EnemyController : MonoBehaviour
     void Die()
     {
         Destroy(GetComponent<BoxCollider>());
+        enemiesKilled++;
         Destroy(gameObject, 2f);
 
         if(OnEnemyKilled != null)
