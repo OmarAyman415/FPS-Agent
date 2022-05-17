@@ -5,10 +5,6 @@ using System.Collections.Generic;
 
 public class scr_EnemyController : MonoBehaviour
 {
-    public delegate void EnemyKilled();
-    public static event EnemyKilled OnEnemyKilled;
-
-
     [Header("Enemy Settings")]
     public float health = 50f;
     public float lookRadius = 10f;
@@ -109,14 +105,8 @@ public class scr_EnemyController : MonoBehaviour
 
     void Die()
     {
-        Destroy(GetComponent<BoxCollider>());
         enemiesKilled++;
-        Destroy(gameObject, 2f);
-
-        if(OnEnemyKilled != null)
-        {
-            OnEnemyKilled();
-        }
+        Destroy(GetComponent<BoxCollider>());
     }
 
     #endregion

@@ -261,6 +261,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221330184}
   m_CullTransparentMesh: 1
+--- !u!1 &430273225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4411015027471273584, guid: badea0a70b064704293f78e3177606f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 4411015027898962881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &430273227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4411015027471273586, guid: badea0a70b064704293f78e3177606f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 4411015027898962881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430273225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968a2561265fc0440812658defb05518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &500217287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,31 +1605,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1992308100 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 637232081107270915, guid: 7b778837cf4220d4694b615a1904b5ed,
-    type: 3}
-  m_PrefabInstance: {fileID: 637232082128032956}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1992308104
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992308100}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 03d1fe4e93c9d4445b3a611df2ee5713, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 2
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &637232082128032956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1628,7 +1621,7 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponMuzzleAnimator
       value: 
-      objectReference: {fileID: 1992308104}
+      objectReference: {fileID: 0}
     - target: {fileID: 637232081481739868, guid: 7b778837cf4220d4694b615a1904b5ed,
         type: 3}
       propertyPath: m_RootOrder
@@ -1777,6 +1770,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5831256539739481235, guid: f293ce1478a473d4a955391e99837c89,
+        type: 3}
+      propertyPath: EnemyPrefab
+      value: 
+      objectReference: {fileID: 430273225}
+    - target: {fileID: 5831256539739481235, guid: f293ce1478a473d4a955391e99837c89,
+        type: 3}
+      propertyPath: enemyController
+      value: 
+      objectReference: {fileID: 430273227}
     - target: {fileID: 5831256539739481236, guid: f293ce1478a473d4a955391e99837c89,
         type: 3}
       propertyPath: player
