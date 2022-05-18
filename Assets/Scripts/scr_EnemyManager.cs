@@ -11,10 +11,13 @@ public class scr_EnemyManager : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject endScreen;
     public TextMeshProUGUI roundNum;
+    public TextMeshProUGUI roundsSurvived;
+    public TextMeshProUGUI healthNum;
     public scr_EnemyController enemyController;
     public Transform[] SpawnPoint;
     public GameObject EnemyPrefab;
     public GameObject pauseMenu;
+    Transform target;
     public int round = 0;
     public int enemySpawnAmount = 3;
     public int enemiesKilled = 0;
@@ -30,16 +33,25 @@ public class scr_EnemyManager : MonoBehaviour
 
     void Start()
     {
+        target = PlayerManager.instance.player.transform;
         StartWave();
     }
 
 
     private void Update()
     {
-        if (enemiesKilled >= enemySpawnAmount)
+        healthNum.text = "Health: " + target.GetComponent<scr_CharacterController>().currentHealth.ToString();
+        roundNum.text = "Round: " + round.ToString();
+        if (round < 2)
         {
-            NextWave();
-            roundNum.text = "Round: " + round.ToString();
+            if (enemiesKilled >= enemySpawnAmount)
+            {
+                NextWave();
+            }
+        }
+        else
+        {
+            EndGame();
         }
     }
 
@@ -81,20 +93,26 @@ public class scr_EnemyManager : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        AudioListener.pause = true;
-        Cursor.lockState = CursorLockMode.None;
-        isPaused = true;
+        if(!endScreen.activeInHierarchy)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
+            Cursor.lockState = CursorLockMode.None;
+            isPaused = true;
+        }
     }
 
     public void UnPause()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        AudioListener.pause = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        isPaused = false;
+        if(!endScreen.activeInHierarchy)
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            isPaused = false;
+        }
     }
 
     public void MainMenu()
@@ -107,5 +125,21 @@ public class scr_EnemyManager : MonoBehaviour
     void LoadMainMenuScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void ReplayGame()
+    {
+        endScreen.SetActive(false);
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+        round = 0;
+    }
+
+    public void EndGame()
+    {
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        endScreen.SetActive(true);
+        roundsSurvived.text = round.ToString();
     }
 }

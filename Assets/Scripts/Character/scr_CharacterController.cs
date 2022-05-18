@@ -234,7 +234,6 @@ public class scr_CharacterController : MonoBehaviour
 
         newCameraRotation.x += (isAimingIn ? playerSettings.ViewYSensitivity * playerSettings.AimingSensitivityEffector : playerSettings.ViewYSensitivity) * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.deltaTime;
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, viewClampYMin, viewClampYMax);
-
         cameraHolder.localRotation = Quaternion.Euler(newCameraRotation);
     }
 
@@ -478,7 +477,7 @@ public class scr_CharacterController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("died");
+        scr_EnemyManager.instance.EndGame();
     }
 
     #endregion
