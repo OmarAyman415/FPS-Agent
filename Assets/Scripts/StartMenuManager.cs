@@ -8,4 +8,9 @@ public class StartMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void ExitGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
 }

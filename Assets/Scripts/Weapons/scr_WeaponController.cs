@@ -83,7 +83,7 @@ public class scr_WeaponController : MonoBehaviour
 
     #endregion
 
-    #region - initialisation -
+    #region - initialization -
     public void Initialise(scr_CharacterController CharacterController)
     {
         characterController = CharacterController;
@@ -96,12 +96,13 @@ public class scr_WeaponController : MonoBehaviour
 
     private void Update()
     {
-        if(!characterController.isPaused)
+        if(!scr_EnemyManager.instance.isPaused)
         {
             if (!isInitialised)
             {
                 return;
             }
+
             //Prevent TimeStamp from overflow
             if (timeStamp > 6.3f)
             {
@@ -109,6 +110,7 @@ public class scr_WeaponController : MonoBehaviour
             }
 
             timeStamp += Time.deltaTime;
+
             CalculateWeaponRotation();
             SetWeaponAnimations();
             CalculateWeaponSway();

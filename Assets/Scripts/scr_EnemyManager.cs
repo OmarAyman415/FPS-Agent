@@ -41,7 +41,7 @@ public class scr_EnemyManager : MonoBehaviour
     private void Update()
     {
         healthNum.text = "Health: " + target.GetComponent<scr_CharacterController>().currentHealth.ToString();
-        if (round < 6)
+        if (round < 2)
         {
             if (enemiesKilled >= enemySpawnAmount)
             {
@@ -122,10 +122,8 @@ public class scr_EnemyManager : MonoBehaviour
         Invoke("LoadMainMenuScene", .4f);
     }
 
-    public void LoadMainMenuScene()
+    void LoadMainMenuScene()
     {
-        Time.timeScale = 1;
-        AudioListener.volume = 1;
         SceneManager.LoadScene(0);
     }
 

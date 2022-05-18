@@ -118,7 +118,7 @@ public class scr_CharacterController : MonoBehaviour
     #region - Update -
     private void Update()
     {
-        if(!isPaused)
+        if(!scr_EnemyManager.instance.isPaused)
         {
             SetIsGrounded();
             SetIsFalling();
