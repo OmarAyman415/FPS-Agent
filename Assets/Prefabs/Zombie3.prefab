@@ -202,7 +202,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 8f7380da49034cd488ddff94b1ac35d1, type: 3}
   m_Controller: {fileID: 9100000, guid: 2ef8e6599b7f9934e8ff0d64c5325a1f, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 2
+  m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -241,8 +241,6 @@ MonoBehaviour:
   attackDelayTimer: 0
   delayBetweenAttacks: 1
   attackAnimStartDelay: 1
-  enemiesKilled: 0
-  spawn: {fileID: 5831256539739481235, guid: f293ce1478a473d4a955391e99837c89, type: 3}
   enemyAnimator: {fileID: 7579383258414406371}
 --- !u!195 &7579383258414406372
 NavMeshAgent:
