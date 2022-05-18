@@ -467,7 +467,6 @@ public class scr_CharacterController : MonoBehaviour
 
         GotHitScreen.GetComponent<Image>().color = color;
 
-        Debug.Log("get damaged bitch");
         currentHealth -= damage;
         if(currentHealth <= 0)
         {

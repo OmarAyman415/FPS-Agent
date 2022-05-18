@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class scr_EnemyManager : MonoBehaviour
 {
     public static scr_EnemyManager instance;
-
-    public GameObject pauseScreen;
     public GameObject endScreen;
     public TextMeshProUGUI roundNum;
     public TextMeshProUGUI roundsSurvived;
@@ -42,7 +40,7 @@ public class scr_EnemyManager : MonoBehaviour
     private void Update()
     {
         healthNum.text = "Health: " + target.GetComponent<scr_CharacterController>().currentHealth.ToString();
-        if (round < 2)
+        if (round < 6)
         {
             if (enemiesKilled >= enemySpawnAmount)
             {
@@ -82,8 +80,8 @@ public class scr_EnemyManager : MonoBehaviour
 
         for (int i =0; i < enemySpawnAmount; i++)
         {
-            SpawnNewEnemy();
             new WaitForSeconds(6f);
+            SpawnNewEnemy();
         }
     }
 
@@ -94,26 +92,22 @@ public class scr_EnemyManager : MonoBehaviour
 
     public void Pause()
     {
-        if(!endScreen.activeInHierarchy)
-        {
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
-            AudioListener.pause = true;
-            Cursor.lockState = CursorLockMode.None;
-            isPaused = true;
-        }
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        AudioListener.pause = true;
+        Cursor.lockState = CursorLockMode.None;
+        isPaused = true;
+        Debug.Log("i just paused the game");
+        
     }
 
     public void UnPause()
     {
-        if(!endScreen.activeInHierarchy)
-        {
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1f;
-            AudioListener.pause = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            isPaused = false;
-        }
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        isPaused = false;
     }
 
     public void MainMenu()
@@ -130,9 +124,9 @@ public class scr_EnemyManager : MonoBehaviour
 
     public void ReplayGame()
     {
+        SceneManager.LoadScene(0);
         isPaused = false;
-        SceneManager.LoadScene(1);
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
 
     public void EndGame()
