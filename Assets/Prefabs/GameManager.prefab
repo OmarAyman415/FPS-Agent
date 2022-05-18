@@ -212,6 +212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a6a8aaea3909c4dbc6e8cfcec439bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseScreen: {fileID: 0}
+  endScreen: {fileID: 0}
+  roundNum: {fileID: 0}
+  roundsSurvived: {fileID: 0}
+  healthNum: {fileID: 0}
   enemyController: {fileID: 7579383258414406373, guid: badea0a70b064704293f78e3177606f5,
     type: 3}
   SpawnPoint:
@@ -222,6 +227,8 @@ MonoBehaviour:
   - {fileID: 5831256538706990917}
   EnemyPrefab: {fileID: 7579383258414406375, guid: badea0a70b064704293f78e3177606f5,
     type: 3}
+  pauseMenu: {fileID: 0}
   round: 0
-  enemiesSpawnAmount: 0
+  enemySpawnAmount: 3
   enemiesKilled: 0
+  isPaused: 0

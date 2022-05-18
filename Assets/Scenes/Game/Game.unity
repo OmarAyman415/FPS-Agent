@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 221330187}
   - component: {fileID: 221330186}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DamageIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Health 100
+  m_text: 'Health: 100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Round 0
+  m_text: 'Round: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -857,12 +857,6 @@ PrefabInstance:
       objectReference: {fileID: 380467165}
     - target: {fileID: 5831256539739481235, guid: f293ce1478a473d4a955391e99837c89,
         type: 3}
-      propertyPath: EnemyPrefab
-      value: 
-      objectReference: {fileID: 7579383258414406375, guid: badea0a70b064704293f78e3177606f5,
-        type: 3}
-    - target: {fileID: 5831256539739481235, guid: f293ce1478a473d4a955391e99837c89,
-        type: 3}
       propertyPath: pauseScreen
       value: 
       objectReference: {fileID: 380467165}
@@ -871,12 +865,6 @@ PrefabInstance:
       propertyPath: roundsSurvived
       value: 
       objectReference: {fileID: 906500560}
-    - target: {fileID: 5831256539739481235, guid: f293ce1478a473d4a955391e99837c89,
-        type: 3}
-      propertyPath: enemyController
-      value: 
-      objectReference: {fileID: 7579383258414406373, guid: badea0a70b064704293f78e3177606f5,
-        type: 3}
     - target: {fileID: 5831256539739481236, guid: f293ce1478a473d4a955391e99837c89,
         type: 3}
       propertyPath: player
@@ -1448,6 +1436,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6859371534550797330, guid: ffda60f8823fd6148be3ce980b631a64,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 645964535}
+    - target: {fileID: 6859371534550797330, guid: ffda60f8823fd6148be3ce980b631a64,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMainMenuScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6859371534550797330, guid: ffda60f8823fd6148be3ce980b631a64,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: scr_EnemyManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffda60f8823fd6148be3ce980b631a64, type: 3}
 --- !u!224 &1263006175 stripped
@@ -1622,6 +1625,21 @@ PrefabInstance:
       value: UnPause
       objectReference: {fileID: 0}
     - target: {fileID: 4366720367948025407, guid: efefa25373a83c84ea1b3ce4920cd91a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: scr_EnemyManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695960219007038525, guid: efefa25373a83c84ea1b3ce4920cd91a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 645964535}
+    - target: {fileID: 8695960219007038525, guid: efefa25373a83c84ea1b3ce4920cd91a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMainMenuScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695960219007038525, guid: efefa25373a83c84ea1b3ce4920cd91a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: scr_EnemyManager, Assembly-CSharp

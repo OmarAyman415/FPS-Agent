@@ -119,18 +119,20 @@ public class scr_EnemyManager : MonoBehaviour
     {
         Time.timeScale = 1;
         AudioListener.volume = 1;
-        Invoke("LoadMainMenuScene", .4f);
+        Invoke(nameof(LoadMainMenuScene), .4f);
     }
 
-    void LoadMainMenuScene()
+    public void LoadMainMenuScene()
     {
+        Time.timeScale = 1;
+        AudioListener.volume = 1;
         SceneManager.LoadScene(0);
     }
 
     public void ReplayGame()
     {
         endScreen.SetActive(false);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         Time.timeScale = 1;
         round = 0;
     }
