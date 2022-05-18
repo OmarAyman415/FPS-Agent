@@ -41,8 +41,7 @@ public class scr_EnemyManager : MonoBehaviour
     private void Update()
     {
         healthNum.text = "Health: " + target.GetComponent<scr_CharacterController>().currentHealth.ToString();
-        roundNum.text = "Round: " + round.ToString();
-        if (round < 2)
+        if (round < 6)
         {
             if (enemiesKilled >= enemySpawnAmount)
             {
@@ -53,6 +52,7 @@ public class scr_EnemyManager : MonoBehaviour
         {
             EndGame();
         }
+        roundNum.text = "Round: " + round.ToString();
     }
 
     void SpawnNewEnemy()
@@ -119,7 +119,7 @@ public class scr_EnemyManager : MonoBehaviour
     {
         Time.timeScale = 1;
         AudioListener.volume = 1;
-        Invoke(nameof(LoadMainMenuScene), .4f);
+        Invoke("LoadMainMenuScene", .4f);
     }
 
     public void LoadMainMenuScene()
