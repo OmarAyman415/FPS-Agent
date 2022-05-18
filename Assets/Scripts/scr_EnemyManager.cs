@@ -34,6 +34,7 @@ public class scr_EnemyManager : MonoBehaviour
     void Start()
     {
         target = PlayerManager.instance.player.transform;
+        Time.timeScale = 1f;
         StartWave();
     }
 
@@ -129,17 +130,17 @@ public class scr_EnemyManager : MonoBehaviour
 
     public void ReplayGame()
     {
-        endScreen.SetActive(false);
+        isPaused = false;
         SceneManager.LoadScene(1);
         Time.timeScale = 1;
-        round = 0;
     }
 
     public void EndGame()
     {
-        Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.None;
         endScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
         roundsSurvived.text = round.ToString();
+        Time.timeScale = 0f;
+        isPaused = true;
     }
 }
