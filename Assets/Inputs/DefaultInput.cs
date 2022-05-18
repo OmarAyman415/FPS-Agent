@@ -420,7 +420,7 @@ public partial class @DefaultInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fb55bbb4-174b-465f-be07-2d4cb0e81621"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": """",

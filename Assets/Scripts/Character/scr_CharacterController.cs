@@ -197,17 +197,13 @@ public class scr_CharacterController : MonoBehaviour
 
     private void Pause()
     {
-        if (isPaused)
+        if (scr_EnemyManager.instance.isPaused)
         {
-            Time.timeScale = 1f;
-            isPaused = false;
-            AudioListener.pause = false;
+            scr_EnemyManager.instance.UnPause();
         }
         else
         {
-            Time.timeScale = 0f; 
-            isPaused = true;
-            AudioListener.pause = true;
+            scr_EnemyManager.instance.Pause();
         }
     }
 
