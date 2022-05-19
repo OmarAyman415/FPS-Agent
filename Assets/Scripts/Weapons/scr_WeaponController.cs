@@ -75,6 +75,7 @@ public class scr_WeaponController : MonoBehaviour
     public bool isAimingIn;
 
     #region - Start -
+
     private void Start() {
         newWeaponRotation = transform.localRotation.eulerAngles;
 
@@ -134,7 +135,6 @@ public class scr_WeaponController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
-                Debug.Log(hit.transform.name);
 
                 scr_EnemyController target = hit.transform.GetComponent<scr_EnemyController>();
                 if (target != null)
@@ -238,8 +238,6 @@ public class scr_WeaponController : MonoBehaviour
 
     private void SetWeaponAnimations()
     {
-        if(!characterController.isPaused)
-        {
             if (isGroundedTrigger)
             {
                 fallingDelay = 0;
@@ -268,7 +266,6 @@ public class scr_WeaponController : MonoBehaviour
 
             weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);
             weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
-        }
     }
 
     #endregion
@@ -277,8 +274,6 @@ public class scr_WeaponController : MonoBehaviour
 
     private void CalculateWeaponSway()
     {
-        if (!characterController.isPaused)
-        {
             var targetPosition = LissajousCurve(swayTime, swayAmountA, swayAmountB) / (isAimingIn ? swayScale * 2 : swayScale);
 
             swayPosition = Vector3.Lerp(swayPosition, targetPosition, Time.smoothDeltaTime * swayLerpSpeed);
@@ -288,7 +283,6 @@ public class scr_WeaponController : MonoBehaviour
             {
                 swayTime = 0;
             }
-        }
     }
 
     #endregion

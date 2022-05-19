@@ -7,14 +7,13 @@ public class scr_EnemyController : MonoBehaviour
 {
     [Header("Enemy Settings")]
     public float health = 50f;
-    public float lookRadius = 10f;
+    float lookRadius = 10f;
     public float damage = 5f;
-
-    public bool playerInReach;
-    public float attackDelayTimer;
-    public float delayBetweenAttacks;
-    public float attackAnimStartDelay;
-    private bool isDead;
+    bool playerInReach;
+    float attackDelayTimer;
+    float delayBetweenAttacks;
+    float attackAnimStartDelay;
+    bool isDead;
 
     Transform target;
     NavMeshAgent agent;
@@ -142,4 +141,5 @@ public class scr_EnemyController : MonoBehaviour
     }
 
     #endregion
+
 }

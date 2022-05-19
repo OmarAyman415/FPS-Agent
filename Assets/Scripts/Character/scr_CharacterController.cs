@@ -8,20 +8,21 @@ public class scr_CharacterController : MonoBehaviour
 {
     private CharacterController characterController;
     private DefaultInput defaultInput;
+
     [HideInInspector]
     public Vector2 input_Movement;
     [HideInInspector]
     public Vector2 input_View;
 
-    private Vector3 newCameraRotation;
-    private Vector3 newCharacterRotation;
+    Vector3 newCameraRotation;
+    Vector3 newCharacterRotation;
 
     [Header("References")]
     public Transform cameraHolder;
     public Transform feetTransform;
 
     [Header("Settings")]
-    public PlayerSettingsModel playerSettings;
+    PlayerSettingsModel playerSettings;
     public float viewClampYMin = -70;
     public float viewClampYMax = 80;
     public LayerMask playerMask;
@@ -31,7 +32,7 @@ public class scr_CharacterController : MonoBehaviour
 
     [Header("Gravity")]
     public float gravityAmount;
-    public float gravityMin;
+    float gravityMin;
     private float playerGravity;
 
     public Vector3 jumpingForce;
@@ -39,18 +40,17 @@ public class scr_CharacterController : MonoBehaviour
 
 
     [Header("Stance")]
-    public PlayerStance playerStance;
+    PlayerStance playerStance;
     public float playerStanceSmoothing;
-    public CharacterStance playerStandStance;
-    public CharacterStance playerCrouchStance;
-    public CharacterStance playerProneStance;
+    CharacterStance playerStandStance;
+    CharacterStance playerCrouchStance;
+    CharacterStance playerProneStance;
     private float stanceCheckErrorMargin = 0.05f;
-
     private float cameraHeight;
     private float cameraHeightVelocity;
-
     private Vector3 stanceCapsuleCenterVelocity;
     private float stanceCapsuleHeightVelocity;
+
     [HideInInspector]
     public bool isSprinting;
     private Vector3 newMovementSpeed;
@@ -60,14 +60,12 @@ public class scr_CharacterController : MonoBehaviour
     public scr_WeaponController currentWeapon;
     public float weaponAnimationSpeed;
 
-    [Header("Pausing")]
-    public scr_EnemyManager enemyManager;
-
     [Header("HurtImage")]
     public GameObject GotHitScreen;
 
     [HideInInspector]
     public bool isGrounded;
+
     [HideInInspector]
     public bool isFalling;
 
@@ -85,7 +83,6 @@ public class scr_CharacterController : MonoBehaviour
         defaultInput.Character.Movement.performed += e => input_Movement = e.ReadValue<Vector2>();
         defaultInput.Character.View.performed += e => input_View = e.ReadValue<Vector2>();
         defaultInput.Character.Jump.performed += e => Jump();
-        defaultInput.Pause.Pause.performed += e => Pause();
         defaultInput.Character.Crouch.performed += e => Crouch();
         defaultInput.Character.Prone.performed += e => Prone();
         defaultInput.Character.Sprint.performed += e => ToggleSprint();
@@ -190,23 +187,6 @@ public class scr_CharacterController : MonoBehaviour
 
         currentWeapon.isAimingIn = isAimingIn;
     }
-
-    #endregion
-
-    #region - Paused -
-
-    private void Pause()
-    {
-        if (scr_EnemyManager.instance.isPaused)
-        {
-            scr_EnemyManager.instance.UnPause();
-        }
-        else
-        {
-            scr_EnemyManager.instance.Pause();
-        }
-    }
-
 
     #endregion
 

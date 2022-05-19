@@ -14,9 +14,8 @@ public class scr_EnemyManager : MonoBehaviour
     public scr_EnemyController enemyController;
     public Transform[] SpawnPoint;
     public GameObject EnemyPrefab;
-    public GameObject pauseMenu;
     Transform target;
-    public int round = 0;
+    public int round = 0;   
     public int enemySpawnAmount = 3;
     public int enemiesKilled = 0;
     [HideInInspector]
@@ -90,26 +89,6 @@ public class scr_EnemyManager : MonoBehaviour
         enemiesKilled++;
     }
 
-    public void Pause()
-    {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        AudioListener.pause = true;
-        Cursor.lockState = CursorLockMode.None;
-        isPaused = true;
-        Debug.Log("i just paused the game");
-        
-    }
-
-    public void UnPause()
-    {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        AudioListener.pause = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        isPaused = false;
-    }
-
     public void MainMenu()
     {
         Time.timeScale = 1;
@@ -124,8 +103,7 @@ public class scr_EnemyManager : MonoBehaviour
 
     public void ReplayGame()
     {
-        SceneManager.LoadScene(0);
-        isPaused = false;
+        SceneManager.LoadScene(1);
         Time.timeScale = 1f;
     }
 
